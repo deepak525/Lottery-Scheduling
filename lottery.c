@@ -7,10 +7,10 @@
 
 void main()
 {
-	char process[5] = { 'A', 'B', 'C', 'D', 'E'};
+	char process[5] = { 'A', 'B', 'C', 'D', 'E'},temp[10];
 	int arrival[10];
-	int brust[10];
-	int i,j;
+	int brust[10],lottery[10],ticket[10][10];
+	int i,j,p,max_tick,z;
 	//Generate arrival time for each process randomly
 	for(i=0;i<5;i++)
 	{
@@ -59,7 +59,32 @@ void main()
 	{
 		printf("\n  %c \t    %d    \t%d",process[i],arrival[i],brust[i]);
 	}
-                 
+	
+        printf("\n\n\nRequest  process    Lottery \t Tickets");
+        p =0;
+        max_tick = 0;
+        //assign one or more lottery numbers to each process
+	for(i=0;i<5;i++)
+	{
+		if(brust[i]>0)
+		{
+			lottery[i]=brust[i]/2;
+			if ((lottery[i] == 0) && (brust[i] > 0))
+                lottery[i] = 1;
+               
+			for (z = 0; z < lottery[i]; z++) {
+                    ticket[i][z] = p++;
+                        max_tick = p;
+                    }
+                    temp[i] = process[i];   
+					
+			printf("\n  %d\t   %c\t\t%d",brust[i],temp[i],lottery[i]);
+			for(z=0;z<lottery[i];z++)
+			{
+				printf("\t::%d::",ticket[i][z]);
+			   }   
+		}
+	}
 
 	
 	
