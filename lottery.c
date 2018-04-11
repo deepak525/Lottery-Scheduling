@@ -17,14 +17,14 @@ void main()
 	//Generate arrival time for each process randomly
 	for(i=0;i<5;i++)
 	{
-		int num = (rand()%16)+ 1;
+		int num = (rand()%5)+ 1;
 		arrival[i] = num;
 	}
 	
 	//Generate brust time for each process randomly
 	for(j=0;j<5;j++)
 	{
-		int num = (rand()%16) + 1;                     //random number b/w {1,15}
+		int num = (rand()%5) + 1;                     //random number b/w {1,15}
 		brust[j] = num;
 	}
 	
