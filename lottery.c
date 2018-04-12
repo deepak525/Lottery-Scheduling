@@ -13,6 +13,11 @@ void main()
 	int z=0,lottery[20],ticket[20][20],q=0;
 	printf("Enter Number Of Process: ");
 	scanf("%d",&n);
+	if(n<=0)
+	{
+		printf("\n\n::::  Invalid Value Of Number Of Process  ::::");
+		exit(0);
+	}
 	for(i=0;i<n;i++)
 	{
 		process[i] = temp;
@@ -72,7 +77,7 @@ void main()
 	
 	//assign one or more lottery numbers to each process
 	int p=1,m_ticket=0;
-	printf("\n\n\nPriority  process  Brust  Lottery   Tickets");
+	printf("\n\n\nPriority  process  Brust  Lottery  Tickets");
 	for(i=0;i<n;i++)
 	{
 		lottery[i] = (brust[i]/quantom) + (n-priority[i]);
@@ -85,11 +90,14 @@ void main()
 		printf("\n  %d\t    %c\t    %d \t    %d\t",priority[i],process[i],brust[i],lottery[i]);
 		for(z=0;z<lottery[i];z++)
 		{
-			printf("   ::%d::",ticket[i][z]);
-		}   
+			if(ticket[i][z]<10)
+				printf("  ::%d:: ",ticket[i][z]);
+			else
+				printf("  ::%d::",ticket[i][z]);
+    	}   
 	}
 	
-	while(tbt>0)
+	while(time!=tbt)
 	{
 	
 	int winner = (rand()%m_ticket-1)+ 1;
@@ -99,30 +107,35 @@ void main()
                 q=i;
                 
     printf("\n\n-------------------------------------");
-    printf("<<<<  Winner: %d   >>>>",winner);
-    printf("-------------------------------------\n\n");
+    printf("<<<<   Winner: %d   >>>>",winner);
+    printf("-------------------------------------\n");
 	
-	if ((brust[q] > 0))  
+	if ((brust[q]>0))  
 	{
-        brust[q] -= quantom;
+        brust[q]-=quantom;
         
-        if (brust[q] > 0) 
+        if (brust[q]>0) 
 		{
-            time += quantom;
+            time+=quantom;
         } 
 		else 
 		{
-            time += (brust[q] + quantom);
+            time+=(brust[q]+quantom);
         }
 		
-		if (brust[q] < 0) {
-                brust[q] = 0;
-            }
-	    printf("\n\nProcess That Are Running Is: %c",process[q]);
-	    printf("\n(Total Time << Remaining Brust time << process ):  ( %d  <<  %d  <<  %c )\n\n",time,brust[q],process[q]);
-    }
-
-     tbt-=quantom;
+		if(brust[q]<0) 
+		{
+                brust[q]=0;
+        }
+	    printf("\n\t\t\t\t  Process That Are Running Is: %c",process[q]);
+	    printf("\n\t   (Total Time << Remaining Brust Time Of This Process << process ):  ( %d  <<  %d  <<  %c )\n",time,brust[q],process[q]);
+       
+	}
+    else
+    {
+    	printf("\n\t\t     >>>>>>Related Process With This Ticket Has Been Completed<<<<<<\n");
+	}
+    
  }
 	
 }
