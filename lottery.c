@@ -10,7 +10,7 @@ void main()
 	char process[20];
 	int brust[20],priority[20],pos;
 	int time=0,quantom=1,tbt=0;
-	int z=0,lottery[20],ticket[20][20];
+	int z=0,lottery[20],ticket[20][20],q=0;
 	printf("Enter Number Of Process: ");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
@@ -82,13 +82,47 @@ void main()
             m_ticket = p;
         }
       			
-		printf("\n  %d\t    %c\t    %d \t    %d",priority[i],process[i],brust[i],lottery[i]);
+		printf("\n  %d\t    %c\t    %d \t    %d\t",priority[i],process[i],brust[i],lottery[i]);
 		for(z=0;z<lottery[i];z++)
 		{
-			printf("\t");
 			printf("   ::%d::",ticket[i][z]);
 		}   
 	}
+	
+	while(tbt>0)
+	{
+	
+	int winner = (rand()%m_ticket-1)+ 1;
+    for(i =0;i<n;i++)
+        for(z=0;z<lottery[i];z++)
+            if(ticket[i][z]==winner)
+                q=i;
+                
+    printf("\n\n-------------------------------------");
+    printf("<<<<  Winner: %d   >>>>",winner);
+    printf("-------------------------------------\n\n");
+	
+	if ((brust[q] > 0))  
+	{
+        brust[q] -= quantom;
+        
+        if (brust[q] > 0) 
+		{
+            time += quantom;
+        } 
+		else 
+		{
+            time += (brust[q] + quantom);
+        }
 		
+		if (brust[q] < 0) {
+                brust[q] = 0;
+            }
+	    printf("\n\nProcess That Are Running Is: %c",process[q]);
+	    printf("\n(Total Time << Remaining Brust time << process ):  ( %d  <<  %d  <<  %c )\n\n",time,brust[q],process[q]);
+    }
+
+     tbt-=quantom;
+ }
 	
 }
