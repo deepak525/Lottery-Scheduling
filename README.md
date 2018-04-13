@@ -1,5 +1,5 @@
 # Lottery-Scheduling
-# Problem:
+## Problem:
 In the problem we have to assign one or more lottery tickets to each of the process.
 A lottery ticket is chosen at random, and the process holding that ticket gets the CPU. The BTV
 operating system implements lottery scheduling by holding a lottery 50 times each second, with
